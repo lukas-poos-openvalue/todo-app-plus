@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!--
+    EI_EXPOSE_REP(2) will complain if there is a mutable field accessible from outside the class.
+    Although sometimes it is applicable to provide defensive copies,
+    this can be very cumbersome especially with records.
+    -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+    </Match>
+
+    <!--
+    Ignore all bugs in generated classes
+    -->
+    <Match>
+        <Class name="~.*\.generated\..*"/>
+    </Match>
+
+    <!-- Sealed hierarchy with final subclasses; no finalizer attack possible -->
+    <Match>
+        <Class name="de.lpo.todo.model.ids.Id"/>
+        <Bug pattern="CT_CONSTRUCTOR_THROW"/>
+    </Match>
+</FindBugsFilter>
